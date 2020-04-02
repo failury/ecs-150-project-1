@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/ecs_150_project_1.dir/main.cpp.o  -o ecs_150_project_1.exe -Wl,--out-implib,libecs_150_project_1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
