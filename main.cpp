@@ -9,12 +9,9 @@
 #include <ctype.h>
 #include <string.h>
 #include <iostream>
-
-
 void ResetCanonicalMode(int fd, struct termios *savedattributes){
   tcsetattr(fd, TCSANOW, savedattributes);
 }
-
 void SetNonCanonicalMode(int fd, struct termios *savedattributes){
   struct termios TermAttributes;
 
@@ -52,43 +49,37 @@ void printPrompt(){
         index = strrchr(WorkingDirectory,'/');
       }
     }
+    strcat(index,"%");
+    char output[5]  = "/...";
     if(count > 2){
-     std::cout<<"/..." << index << "%";
+      strcat(output,index);
+      write(1,output,strlen(output));
+    } else {
+      write(1,WorkingDirectory,strlen(WorkingDirectory));
     }
       free(WorkingDirectory);
   }
 
 }
 void readCommand() {
-  char RXChar;
-  read(STDIN_FILENO, &RXChar, 1);
-  if (0x04 == RXChar) { // Control-d
+  char c;
+  read (STDIN_FILENO, &c, 1);
+  if (c == '\004')
     return;
-  } else {
-    if (isprint(RXChar)) {
-      printf("RX: '%c' 0x%02X\n", RXChar, RXChar);
-    } else {
-      printf("RX: ' ' 0x%02X\n", RXChar);
-    }
-  }
+  else
+    putchar (c);
 }
 void executeCommand(){
 
 }
 
 int main(int argc, char *argv[]){
-  //struct termios SavedTermAttributes;
-
+  struct termios SavedTermAttributes;
   printPrompt();
-  //SetNonCanonicalMode(STDIN_FILENO, &SavedTermAttributes);
+  readCommand();
 
-//  while(1){
-//    printPrompt();
-//    readCommand();
-//
-//
-//  }
 
-  //ResetCanonicalMode(STDIN_FILENO, &SavedTermAttributes);
+
+  ResetCanonicalMode(0, &SavedTermAttributes);
   return 0;
 }
