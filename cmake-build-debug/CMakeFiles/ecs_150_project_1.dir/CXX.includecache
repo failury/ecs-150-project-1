@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/failury/Desktop/ecs-150-project-1/main.cpp
+unistd.h
+-
+stdio.h
+-
+stdlib.h
+-
+termios.h
+-
+ctype.h
+-
+string.h
+-
+iostream
+-
+
