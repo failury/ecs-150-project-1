@@ -53,9 +53,9 @@ void printPrompt(){
     char output[5]  = "/...";
     if(count > 2){
       strcat(output,index);
-      write(1,output,strlen(output));
+      write(STDOUT_FILENO,output,strlen(output));
     } else {
-      write(1,WorkingDirectory,strlen(WorkingDirectory));
+      write(STDOUT_FILENO,WorkingDirectory,strlen(WorkingDirectory));
     }
       free(WorkingDirectory);
   }
@@ -67,7 +67,7 @@ void readCommand() {
   if (c == '\004')
     return;
   else
-    putchar (c);
+    write(STDOUT_FILENO, "a", 1);
 }
 void executeCommand(){
 
@@ -75,8 +75,11 @@ void executeCommand(){
 
 int main(int argc, char *argv[]){
   struct termios SavedTermAttributes;
-  printPrompt();
-  readCommand();
+  while(1){
+    printPrompt();
+    readCommand() ;
+  }
+
 
 
 
