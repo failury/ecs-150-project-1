@@ -9,6 +9,32 @@
 #include <ctype.h>
 #include <string.h>
 #include <iostream>
+#include <vector>
+#include <list>
+bool isExit = false;
+std::list<std::string> commandHistory;
+void tokenize(std::string const &str, const char* delim,std::list<std::string> &out)
+{
+  //source:https://www.techiedelight.com/split-string-cpp-using-delimiter/
+  char *token = strtok(const_cast<char*>(str.c_str()), delim);
+  while (token != nullptr)
+  {
+    out.push_back(std::string(token));
+    token = strtok(nullptr, delim);
+  }
+}
+void cd(std::string directory){
+
+}
+void ls(std::string directory){
+
+}
+void pwd(){
+
+}
+void ff(std::string filename,std::string directory){
+
+}
 void ResetCanonicalMode(int fd, struct termios *savedattributes){
   tcsetattr(fd, TCSANOW, savedattributes);
 }
@@ -31,7 +57,6 @@ void SetNonCanonicalMode(int fd, struct termios *savedattributes){
   TermAttributes.c_cc[VTIME] = 0;
   tcsetattr(fd, TCSAFLUSH, &TermAttributes);
 }
-
 void printPrompt(){
   char*WorkingDirectory;
   if((WorkingDirectory = getcwd(NULL, 0)) == NULL)
@@ -40,44 +65,78 @@ void printPrompt(){
   }
   else
   {
-    int count = 0;
-    char *index;
-    for(int i=0;i <= strlen(WorkingDirectory); i++){
-      if(WorkingDirectory[i] == '/') count++;
-      if(count >2)
-      {
-        index = strrchr(WorkingDirectory,'/');
-      }
-    }
-    strcat(index,"%");
     char output[5]  = "/...";
-    if(count > 2){
+    char *index;
+    if(strlen(WorkingDirectory) >= 16)
+    {
+      index = strrchr(WorkingDirectory,'/');
+      strcat(index,"%");
       strcat(output,index);
       write(STDOUT_FILENO,output,strlen(output));
-    } else {
+    }else {
+      strcat(WorkingDirectory,"%");
       write(STDOUT_FILENO,WorkingDirectory,strlen(WorkingDirectory));
     }
-      free(WorkingDirectory);
   }
-
 }
-void readCommand() {
+std::string readCommand() {
+  std::string command;
   char c;
-  read (STDIN_FILENO, &c, 1);
-  if (c == '\004')
-    return;
-  else
-    write(STDOUT_FILENO, "a", 1);
+  do {
+    if(c == '\004')
+    {
+      isExit = true;
+      return command;
+    } else {
+      read(STDIN_FILENO, &c, 1);
+      command += c;
+    }
+  } while (c != '\n');
+  return command;
 }
-void executeCommand(){
+void addTohistory(std::string command){
+  commandHistory.push_back(command);
+  if(commandHistory.size() > 10){
+    commandHistory.pop_front();
+  }
+}
+std::list<std::string> processCommand(std::string command){
+  command.pop_back();
+  addTohistory(command);
+  std::list<std::string> CommandandArgs;
+  tokenize(command, " ", CommandandArgs);
+  return CommandandArgs;
+}
 
+void executeCommand(std::list<std::string> processedCommand){
+  if (processedCommand.front() == "exit") {
+    isExit = true;
+    return;
+  }
+  if (processedCommand.front() == "cd") {
+    cd(*std::next(processedCommand.begin(),1));
+  }else {
+    write(STDOUT_FILENO, "Command: ",9);
+    for (auto &s: processedCommand) {
+      write(STDOUT_FILENO, s.c_str(),s.length());
+      write(STDOUT_FILENO, " ",1);
+    }
+    write(STDOUT_FILENO, "\n",1);
+  }
+//  if (processedCommand.front() == "ls") ls(*std::next(processedCommand.begin(),1));
+//  if (processedCommand.front() == "pwd") pwd();
+//  if (processedCommand.front() == "ff") ff(*std::next(processedCommand.begin(),1), *std::next(processedCommand.begin(),2));
 }
 
 int main(int argc, char *argv[]){
   struct termios SavedTermAttributes;
-  while(1){
+  std::string command;
+  std::list<std::string> processedCommand;
+  while(isExit == false){
     printPrompt();
-    readCommand() ;
+    command = readCommand();
+    processedCommand = processCommand(command);
+    executeCommand(processedCommand);
   }
 
 
