@@ -18,7 +18,7 @@ void tokenize(std::string const &str, const char *delim, std::list<std::string> 
   //source:https://www.techiedelight.com/split-string-cpp-using-delimiter/
   char *token = strtok(const_cast<char *>(str.c_str()), delim);
   while (token != nullptr) {
-    out.push_back(std::string(token));
+    out.emplace_back(token);
     token = strtok(nullptr, delim);
   }
 }
@@ -57,7 +57,7 @@ void SetNonCanonicalMode(int fd, struct termios *savedattributes) {
   tcsetattr(fd, TCSAFLUSH, &TermAttributes);
 }
 void printPrompt() {
-  for (unsigned int i = 0; i < 256; i++) {// clear the field
+  for (unsigned int i = 0; i < 128; i++) {// clear the field
     write(STDOUT_FILENO, "\b\b", 3);
   }
   char *WorkingDirectory;
@@ -99,7 +99,7 @@ std::string readCommand() {
       if (c == 0x5B) {
         read(STDIN_FILENO, &c, 1);
         if (c == 0x41) {
-          for (unsigned int i = 0; i < 256; i++) {// clear the field
+          for (unsigned int i = 0; i < command.length(); i++) {// clear the field
             write(STDOUT_FILENO, "\b\b", 3);
           }
           if (commandHistoryup.empty()) {
@@ -114,7 +114,7 @@ std::string readCommand() {
 
         } else if (c == 0x42)// down arrow
         {
-          for (unsigned int i = 0; i < 256; i++) {// clear the field
+          for (unsigned int i = 0; i < command.length(); i++) {// clear the field
             write(STDOUT_FILENO, "\b\b", 3);
           }
           if (commandHistorydown.empty()) {
