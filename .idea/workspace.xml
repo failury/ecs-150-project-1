@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ab21af7-1ad0-43c9-b84e-adc2982f3267" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -37,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="141" selection-start-line="141" selection-end-line="141" />
+            <state relative-caret-position="337">
+              <caret line="130" column="37" selection-start-line="130" selection-start-column="23" selection-end-line="130" selection-end-column="37" />
               <folding>
                 <element signature="e#42#61#0" expanded="true" />
               </folding>
@@ -180,15 +179,16 @@
       <workItem from="1586062727111" duration="14401000" />
       <workItem from="1586145537912" duration="31526000" />
       <workItem from="1586231489761" duration="1542000" />
-      <workItem from="1586233052481" duration="8404000" />
+      <workItem from="1586233052481" duration="9217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41472000" />
+    <option name="totallyTimeSpent" value="42285000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1501004" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -268,11 +268,6 @@
           <url>file://$PROJECT_DIR$/main.cpp</url>
           <line>223</line>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>120</line>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -374,8 +369,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="141" selection-start-line="141" selection-end-line="141" />
+        <state relative-caret-position="337">
+          <caret line="130" column="37" selection-start-line="130" selection-start-column="23" selection-end-line="130" selection-end-column="37" />
           <folding>
             <element signature="e#42#61#0" expanded="true" />
           </folding>

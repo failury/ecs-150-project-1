@@ -116,14 +116,14 @@ std::string readCommand() {
       if (c == 0x5B) {
         read(STDIN_FILENO, &c, 1);
         if (c == 0x41) {
-          for (unsigned int i = 0; i < command.length(); i++) {// clear the field
+          for (unsigned int i = 0; i < 128; i++) {// clear the field
             write(STDOUT_FILENO, "\b \b", 3);
           }
           historyIndex--;
           if (historyIndex <= -1) {
             historyIndex = 0;
             write(STDOUT_FILENO, "\a", 1);
-            for (unsigned int i = 0; i < command.length(); i++) {// clear the field
+            for (unsigned int i = 0; i < 128; i++) {// clear the field
               write(STDOUT_FILENO, "\b \b", 3);
             }
             auto displayCommand = std::next(commandHistory.begin(),historyIndex);
