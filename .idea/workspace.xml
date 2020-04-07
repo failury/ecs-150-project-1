@@ -13,10 +13,39 @@
   <component name="ChangeListManager">
     <list default="true" id="6ab21af7-1ad0-43c9-b84e-adc2982f3267" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ecs_150_project_1.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.cxx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ecs_150_project_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ecs_150_project_1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ecs_150_project_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ecs_150_project_1.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,49 +61,6 @@
     <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
     <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-328">
-              <caret line="17" column="61" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="61" />
-              <folding>
-                <element signature="e#42#61#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/9.3.0/include/c++/bits/stl_list.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="732" selection-start-line="732" selection-end-line="732" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noncanmode.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>clearField</find>
@@ -85,15 +71,6 @@
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/noncanmode.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/main.cpp" />
-      </list>
-    </option>
-  </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
@@ -103,25 +80,6 @@
   <component name="ProjectId" id="1a6j19Uzb77xxadjQi5qdQxHiig" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ecs_150_project_1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ecs-150-project-1" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -139,19 +97,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="dynamic.analysis.tools.valgrind" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="dynamic.analysis.tools.profiler" />
   </component>
   <component name="RunManager">
     <configuration name="ecs_150_project_1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ecs_150_project_1" TARGET_NAME="ecs_150_project_1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ecs_150_project_1" RUN_TARGET_NAME="ecs_150_project_1">
@@ -190,79 +136,70 @@
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43693000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1501004" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32897604" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.42592594" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.3278867" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="CMake" order="12" weight="0.32897604" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1238" height="257" key="GridCell.Tab.0.bottom" timestamp="1586137678813">
+    <state width="1878" height="381" key="GridCell.Tab.-1.bottom" timestamp="1586258560817">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.0.bottom/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678813" />
+    <state width="1878" height="381" key="GridCell.Tab.-1.bottom/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586258560817" />
+    <state width="1878" height="381" key="GridCell.Tab.-1.center" timestamp="1586258560816">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="381" key="GridCell.Tab.-1.center/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586258560816" />
+    <state width="1878" height="381" key="GridCell.Tab.-1.left" timestamp="1586258560815">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="381" key="GridCell.Tab.-1.left/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586258560815" />
+    <state width="1878" height="381" key="GridCell.Tab.-1.right" timestamp="1586258560816">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="381" key="GridCell.Tab.-1.right/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586258560816" />
+    <state width="1878" height="362" key="GridCell.Tab.0.bottom" timestamp="1586259842767">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="362" key="GridCell.Tab.0.bottom/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259842767" />
     <state width="1238" height="178" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1586094004846" />
-    <state width="1238" height="257" key="GridCell.Tab.0.center" timestamp="1586137678812">
+    <state width="1878" height="362" key="GridCell.Tab.0.center" timestamp="1586259842766">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.0.center/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678812" />
+    <state width="1878" height="362" key="GridCell.Tab.0.center/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259842766" />
     <state width="1238" height="178" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1586094004845" />
-    <state width="1238" height="257" key="GridCell.Tab.0.left" timestamp="1586137678812">
+    <state width="1878" height="362" key="GridCell.Tab.0.left" timestamp="1586259842765">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.0.left/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678812" />
+    <state width="1878" height="362" key="GridCell.Tab.0.left/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259842765" />
     <state width="1238" height="178" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1586094004845" />
-    <state width="1238" height="257" key="GridCell.Tab.0.right" timestamp="1586137678813">
+    <state width="1878" height="362" key="GridCell.Tab.0.right" timestamp="1586259842766">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.0.right/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678813" />
+    <state width="1878" height="362" key="GridCell.Tab.0.right/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259842766" />
     <state width="1238" height="178" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1586094004846" />
-    <state width="1238" height="257" key="GridCell.Tab.1.bottom" timestamp="1586137678811">
+    <state width="1878" height="362" key="GridCell.Tab.1.bottom" timestamp="1586259838005">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.1.bottom/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678811" />
+    <state width="1878" height="362" key="GridCell.Tab.1.bottom/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259838005" />
     <state width="1238" height="257" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1586078925275" />
-    <state width="1238" height="257" key="GridCell.Tab.1.center" timestamp="1586137678810">
+    <state width="1878" height="362" key="GridCell.Tab.1.center" timestamp="1586259838003">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.1.center/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678810" />
+    <state width="1878" height="362" key="GridCell.Tab.1.center/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259838003" />
     <state width="1238" height="257" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1586078925274" />
-    <state width="1238" height="257" key="GridCell.Tab.1.left" timestamp="1586137678810">
+    <state width="1878" height="362" key="GridCell.Tab.1.left" timestamp="1586259838002">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.1.left/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678810" />
+    <state width="1878" height="362" key="GridCell.Tab.1.left/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259838002" />
     <state width="1238" height="257" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1586078925274" />
-    <state width="1238" height="257" key="GridCell.Tab.1.right" timestamp="1586137678811">
+    <state width="1878" height="362" key="GridCell.Tab.1.right" timestamp="1586259838004">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1238" height="257" key="GridCell.Tab.1.right/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586137678811" />
+    <state width="1878" height="362" key="GridCell.Tab.1.right/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586259838004" />
     <state width="1238" height="257" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1586078925275" />
+    <state x="469" y="190" key="SettingsEditor" timestamp="1586258469653">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="469" y="190" key="SettingsEditor/-1280.23.1280.777/0.23.1920.1057@0.23.1920.1057" timestamp="1586258469653" />
     <state x="422" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586074351070">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -273,13 +210,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>218</line>
+          <line>217</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>100</line>
-          <option name="timeStamp" value="27" />
+          <line>164</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -289,105 +226,5 @@
         <watch expression="commandHistory" language="ObjectiveC" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>commandHistory</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>directory</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>displayCommand</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>historyIndex</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>commandHistorydown</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>commandHistoryup</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-    <expressions id="evaluateExpression">
-      <expression>
-        <expression-string>getcwd(NULL, 0)</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>CommandandArgs</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>directory.length()</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>commandHistory.size()</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>int(commandHistory.size()-1)</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>displayCommand</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/ext/new_allocator.h" />
-    <entry file="file://$PROJECT_DIR$/noncanmode.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/9.3.0/include/c++/bits/stl_list.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="732" selection-start-line="732" selection-end-line="732" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-328">
-          <caret line="17" column="61" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="61" />
-          <folding>
-            <element signature="e#42#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

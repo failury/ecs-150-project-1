@@ -12,7 +12,7 @@
 #include <vector>
 #include <list>
 bool isExit = false;
-std::list<std::string> commandHistory;
+std::vector<std::string> commandHistory;
 int historyIndex = 0;
 void clearField(int size){
   for (unsigned int i = 0; i < size; i++) {// clear the field
@@ -121,23 +121,22 @@ std::string readCommand() {
         if (c == 0x41) {
           clearField(128);
           historyIndex--;
-          if (historyIndex <= -1) {
+          if (historyIndex <= 0) {
             historyIndex = 0;
             write(STDOUT_FILENO, "\a", 1);
             clearField(128);
-            auto displayCommand = std::next(commandHistory.begin(),historyIndex);
+            auto displayCommand = commandHistory[historyIndex];
             printPrompt();
-            command = *displayCommand;
+            command = displayCommand;
             write(STDOUT_FILENO, command.c_str(), command.length());
-
             continue;
           } else {
-            auto displayCommand = std::next(commandHistory.begin(),historyIndex);
+            auto displayCommand = commandHistory[historyIndex];
+
             printPrompt();
-            command = *displayCommand;
+            command = displayCommand;
             write(STDOUT_FILENO, command.c_str(), command.length());
           }
-
         } if (c == 0x42)// down arrow
         {
           clearField(128);
@@ -169,7 +168,7 @@ void addTohistory(std::string command) {
   commandHistory.push_back(command);
   historyIndex++;
   if (commandHistory.size() > 10) {
-    commandHistory.pop_front();
+    commandHistory.erase(commandHistory.begin());
   }
 }
 std::list<std::string> processCommand(std::string command) {

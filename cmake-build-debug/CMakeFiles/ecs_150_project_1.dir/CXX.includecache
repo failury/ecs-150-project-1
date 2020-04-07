@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/failury/Desktop/ecs-150-project-1/main.cpp
+/Users/failury/Desktop/ecs-150-project-1/main.cpp
 unistd.h
 -
 stdio.h
