@@ -14,6 +14,11 @@
 bool isExit = false;
 std::list<std::string> commandHistory;
 int historyIndex = 0;
+void clearField(int size){
+  for (unsigned int i = 0; i < size; i++) {// clear the field
+    write(STDOUT_FILENO, "\b \b", 3);
+  }
+}
 void tokenize(std::string const &str, const char *delim, std::list<std::string> &out) {
   //source:https://www.techiedelight.com/split-string-cpp-using-delimiter/
   char *token = strtok(const_cast<char *>(str.c_str()), delim);
@@ -75,9 +80,7 @@ void SetNonCanonicalMode(int fd, struct termios *savedattributes){
   tcsetattr(fd, TCSAFLUSH, &TermAttributes);
 }
 void printPrompt() {
-  for (unsigned int i = 0; i < 128; i++) {// clear the field
-    write(STDOUT_FILENO, "\b \b", 3);
-  }
+  clearField(128);
   std::string WorkingDirectory;
   WorkingDirectory = getcwd(NULL, 0);
   std::string output = "/.../";
@@ -116,16 +119,12 @@ std::string readCommand() {
       if (c == 0x5B) {
         read(STDIN_FILENO, &c, 1);
         if (c == 0x41) {
-          for (unsigned int i = 0; i < 128; i++) {// clear the field
-            write(STDOUT_FILENO, "\b \b", 3);
-          }
+          clearField(128);
           historyIndex--;
           if (historyIndex <= -1) {
             historyIndex = 0;
             write(STDOUT_FILENO, "\a", 1);
-            for (unsigned int i = 0; i < 128; i++) {// clear the field
-              write(STDOUT_FILENO, "\b \b", 3);
-            }
+            clearField(128);
             auto displayCommand = std::next(commandHistory.begin(),historyIndex);
             printPrompt();
             command = *displayCommand;
@@ -141,15 +140,11 @@ std::string readCommand() {
 
         } if (c == 0x42)// down arrow
         {
-          for (unsigned int i = 0; i < command.length(); i++) {// clear the field
-            write(STDOUT_FILENO, "\b \b", 3);
-          }
+          clearField(128);
           historyIndex++;
            if(historyIndex >= int(commandHistory.size()) || historyIndex >=10){
             historyIndex = int(commandHistory.size());
-            for (unsigned int i = 0; i < command.length(); i++) {// clear the field
-               write(STDOUT_FILENO, "\b \b", 3);
-            }
+             clearField(128);
             write(STDOUT_FILENO, "\a", 1);
             printPrompt();
             continue;
