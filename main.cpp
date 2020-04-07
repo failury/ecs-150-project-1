@@ -18,12 +18,29 @@ void tokenize(std::string const &str, const char *delim, std::list<std::string> 
   //source:https://www.techiedelight.com/split-string-cpp-using-delimiter/
   char *token = strtok(const_cast<char *>(str.c_str()), delim);
   while (token != nullptr) {
-    out.emplace_back(token);
+    out.push_back(token);
     token = strtok(nullptr, delim);
   }
-}
+  out.push_back("noargs");
+  }
 void cd(std::string directory) {
-
+  std::string destination;
+  std::string currentDirecoty= getcwd(NULL, 0);
+  if(directory == "noargs")
+  {
+  chdir(getenv("HOME"));
+  }else if(directory == "..") {
+  auto index = currentDirecoty.find_last_of("/");
+    destination = currentDirecoty.substr(0,index);
+    if (chdir(destination.c_str()) == -1){
+      write(STDOUT_FILENO, "Error Changing Directory\n", 25);
+    }
+  } else {
+    destination = currentDirecoty + "/" + directory;
+    if(chdir(destination.c_str()) == -1){
+      write(STDOUT_FILENO, "Error Changing Directory\n", 25);
+    }
+  }
 }
 void ls(std::string directory) {
 
@@ -59,24 +76,23 @@ void SetNonCanonicalMode(int fd, struct termios *savedattributes){
 }
 void printPrompt() {
   for (unsigned int i = 0; i < 128; i++) {// clear the field
-    write(STDOUT_FILENO, "\b\b", 3);
+    write(STDOUT_FILENO, "\b \b", 3);
   }
-  char *WorkingDirectory;
-  if ((WorkingDirectory = getcwd(NULL, 0)) == NULL) {
-    perror("Error getting working directory");
-  } else {
-    char output[5] = "/...";
-    char *index;
-    if (strlen(WorkingDirectory) >= 16) {
-      index = strrchr(WorkingDirectory, '/');
-      strcat(index, "% ");
-      strcat(output, index);
-      write(STDOUT_FILENO, output, strlen(output));
+  std::string WorkingDirectory;
+  WorkingDirectory = getcwd(NULL, 0);
+  std::string output = "/.../";
+  int index;
+    if (WorkingDirectory.length() >= 16) {
+      index = WorkingDirectory.find_last_of("/");
+      WorkingDirectory = WorkingDirectory.substr(index+1);
+      WorkingDirectory +="% ";
+      output+= WorkingDirectory;
+      write(STDOUT_FILENO, output.c_str(), output.length());
     } else {
-      strcat(WorkingDirectory, "% ");
-      write(STDOUT_FILENO, WorkingDirectory, strlen(WorkingDirectory));
+      WorkingDirectory +="% ";
+      write(STDOUT_FILENO, WorkingDirectory.c_str(), WorkingDirectory.length());
     }
-  }
+
 }
 std::string readCommand() {
   std::string command;
