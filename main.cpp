@@ -195,6 +195,9 @@ void executeCommand(std::list<std::string> processedCommand) {
   } else {
     write(STDOUT_FILENO, "Command: ", 9);
     for (auto &s: processedCommand) {
+      if (s == "noargs") {
+        break;
+      }
       write(STDOUT_FILENO, s.c_str(), s.length());
       write(STDOUT_FILENO, " ", 1);
     }
