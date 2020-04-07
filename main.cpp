@@ -12,8 +12,8 @@
 #include <vector>
 #include <list>
 bool isExit = false;
-std::list<std::string> commandHistoryup;
-std::list<std::string> commandHistorydown;
+std::list<std::string> commandHistory;
+int historyIndex = 0;
 void tokenize(std::string const &str, const char *delim, std::list<std::string> &out) {
   //source:https://www.techiedelight.com/split-string-cpp-using-delimiter/
   char *token = strtok(const_cast<char *>(str.c_str()), delim);
@@ -34,23 +34,24 @@ void pwd() {
 void ff(std::string filename, std::string directory) {
 
 }
-void ResetCanonicalMode(int fd, struct termios *savedattributes) {
+void ResetCanonicalMode(int fd, struct termios *savedattributes){
   tcsetattr(fd, TCSANOW, savedattributes);
 }
-void SetNonCanonicalMode(int fd, struct termios *savedattributes) {
+
+void SetNonCanonicalMode(int fd, struct termios *savedattributes){
   struct termios TermAttributes;
 
-  // Make sure stdin is a terminal. 
-  if (!isatty(fd)) {
-    fprintf(stderr, "Not a terminal.\n");
+  // Make sure stdin is a terminal.
+  if(!isatty(fd)){
+    fprintf (stderr, "Not a terminal.\n");
     exit(0);
   }
 
-  // Save the terminal attributes so we can restore them later. 
+  // Save the terminal attributes so we can restore them later.
   tcgetattr(fd, savedattributes);
 
-  // Set the funny terminal modes. 
-  tcgetattr(fd, &TermAttributes);
+  // Set the funny terminal modes.
+  tcgetattr (fd, &TermAttributes);
   TermAttributes.c_lflag &= ~(ICANON | ECHO); // Clear ICANON and ECHO. 
   TermAttributes.c_cc[VMIN] = 1;
   TermAttributes.c_cc[VTIME] = 0;
@@ -68,11 +69,11 @@ void printPrompt() {
     char *index;
     if (strlen(WorkingDirectory) >= 16) {
       index = strrchr(WorkingDirectory, '/');
-      strcat(index, "%");
+      strcat(index, "% ");
       strcat(output, index);
       write(STDOUT_FILENO, output, strlen(output));
     } else {
-      strcat(WorkingDirectory, "%");
+      strcat(WorkingDirectory, "% ");
       write(STDOUT_FILENO, WorkingDirectory, strlen(WorkingDirectory));
     }
   }
@@ -91,7 +92,7 @@ std::string readCommand() {
       if (command.length() == 0) {//cant delete anymore
         write(STDOUT_FILENO, "\a", 1);
       } else {
-        write(STDOUT_FILENO, "\b\b", 3);//**
+        write(STDOUT_FILENO, "\b \b", 3);//**
         command.pop_back();
       }
     } else if (c== 0x1B) { //the up arrow is represented as three ASCII character, 0x1B, 0x5B and 0x41, down arrow is x1B, 0x5B and 0x42.
@@ -100,46 +101,64 @@ std::string readCommand() {
         read(STDIN_FILENO, &c, 1);
         if (c == 0x41) {
           for (unsigned int i = 0; i < command.length(); i++) {// clear the field
-            write(STDOUT_FILENO, "\b\b", 3);
+            write(STDOUT_FILENO, "\b \b", 3);
           }
-          if (commandHistoryup.empty()) {
+          historyIndex--;
+          if (historyIndex <= -1) {
+            historyIndex = 0;
             write(STDOUT_FILENO, "\a", 1);
-          } else {
-            auto displayCommand = commandHistoryup.back();
-            commandHistorydown.push_back(displayCommand);
-            commandHistoryup.pop_back();
+            for (unsigned int i = 0; i < command.length(); i++) {// clear the field
+              write(STDOUT_FILENO, "\b \b", 3);
+            }
+            auto displayCommand = std::next(commandHistory.begin(),historyIndex);
             printPrompt();
-            write(STDOUT_FILENO, displayCommand.c_str(), displayCommand.length());
+            command = *displayCommand;
+            write(STDOUT_FILENO, command.c_str(), command.length());
+
+            continue;
+          } else {
+            auto displayCommand = std::next(commandHistory.begin(),historyIndex);
+            printPrompt();
+            command = *displayCommand;
+            write(STDOUT_FILENO, command.c_str(), command.length());
           }
 
-        } else if (c == 0x42)// down arrow
+        } if (c == 0x42)// down arrow
         {
           for (unsigned int i = 0; i < command.length(); i++) {// clear the field
-            write(STDOUT_FILENO, "\b\b", 3);
+            write(STDOUT_FILENO, "\b \b", 3);
           }
-          if (commandHistorydown.empty()) {
+          historyIndex++;
+           if(historyIndex >= int(commandHistory.size()) || historyIndex >=10){
+            historyIndex = int(commandHistory.size());
+            for (unsigned int i = 0; i < command.length(); i++) {// clear the field
+               write(STDOUT_FILENO, "\b \b", 3);
+            }
             write(STDOUT_FILENO, "\a", 1);
-          } else {
-            auto displayCommand = commandHistorydown.back();
-            commandHistoryup.push_back(displayCommand);
-            commandHistorydown.pop_back();
             printPrompt();
-            write(STDOUT_FILENO, displayCommand.c_str(), displayCommand.length());
+            continue;
+          } else
+            {
+            auto displayCommand = std::next(commandHistory.begin(),historyIndex);
+            command = *displayCommand;
+            printPrompt();
+            write(STDOUT_FILENO, command.c_str(), command.length());
           }
         }
       }
     }
     else {
-
       command += c;
+      write(STDOUT_FILENO, &c, 1);
     }
   } while (c != 0x0A);
   return command;
 }
 void addTohistory(std::string command) {
-  commandHistoryup.push_back(command);
-  if (commandHistoryup.size() > 10) {
-    commandHistoryup.pop_front();
+  commandHistory.push_back(command);
+  historyIndex++;
+  if (commandHistory.size() > 10) {
+    commandHistory.pop_front();
   }
 }
 std::list<std::string> processCommand(std::string command) {
@@ -158,7 +177,6 @@ void executeCommand(std::list<std::string> processedCommand) {
   if (processedCommand.front() == "cd") {
     cd(*std::next(processedCommand.begin(), 1));
   } else {
-    write(STDOUT_FILENO, "\n", 1);
     write(STDOUT_FILENO, "Command: ", 9);
     for (auto &s: processedCommand) {
       write(STDOUT_FILENO, s.c_str(), s.length());
