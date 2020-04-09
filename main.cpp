@@ -19,14 +19,60 @@ void clearField(int size){
     write(STDOUT_FILENO, "\b \b", 3);
   }
 }
-void tokenize(std::string const &str, const char *delim, std::list<std::string> &out) {
-  //source:https://www.techiedelight.com/split-string-cpp-using-delimiter/
-  char *token = strtok(const_cast<char *>(str.c_str()), delim);
-  while (token != nullptr) {
-    out.push_back(token);
-    token = strtok(nullptr, delim);
+
+std::string tokenize(std::string string) {
+  // adapted from https://www.geeksforgeeks.org/remove-extra-spaces-string/
+  std::string str = string;
+  // n is length of the original string
+  int n = str.length();
+  // i points to next position to be filled in
+  // output string/ j points to next character
+  // in the original string
+  int i = 0, j = -1;
+  // flag that sets to true is space is found
+  bool spaceFound = false;
+  // Handles leading spaces
+  while (++j < n && str[j] == ' ');
+  // read all characters of original string
+  while (j < n)
+  {
+    // if current characters is non-space
+    if (str[j] != ' ')
+    {
+      // remove preceding spaces before dot,
+      // comma & question mark
+      if ((str[j] == '.' || str[j] == ',' ||
+          str[j] == '?') && i - 1 >= 0 &&
+          str[i - 1] == ' ')
+        str[i - 1] = str[j++];
+      else
+        // copy current character at index i
+        // and increment both i and j
+        str[i++] = str[j++];
+      // set space flag to false when any
+      // non-space character is found
+      spaceFound = false;
+    }
+      // if current character is a space
+    else if (str[j++] == ' ')
+    {
+      // If space is encountered for the first
+      // time after a word, put one space in the
+      // output and set space flag to true
+      if (!spaceFound)
+      {
+        str[i++] = ' ';
+        spaceFound = true;
+      }
+    }
   }
-  out.push_back("noargs");
+
+  // Remove trailing spaces
+  if (i <= 1)
+    str.erase(str.begin() + i, str.end());
+  else
+    str.erase(str.begin() + i - 1, str.end());
+  return str;
   }
 void cd(std::string directory) {
   std::string destination;
@@ -51,7 +97,9 @@ void ls(std::string directory) {
 
 }
 void pwd() {
-
+  std::string currentDirecoty= getcwd(NULL, 0);
+  write(STDOUT_FILENO,currentDirecoty.c_str(),currentDirecoty.length());
+  write(STDOUT_FILENO, "\n", 1);
 }
 void ff(std::string filename, std::string directory) {
 
@@ -120,39 +168,39 @@ std::string readCommand() {
         read(STDIN_FILENO, &c, 1);
         if (c == 0x41) {
           clearField(128);
-          historyIndex--;
+          historyIndex-=1;
           if (historyIndex <= 0) {
             historyIndex = 0;
             write(STDOUT_FILENO, "\a", 1);
             clearField(128);
-            auto displayCommand = commandHistory[historyIndex];
+            std::string displayCommand = commandHistory[historyIndex];
             printPrompt();
             command = displayCommand;
             write(STDOUT_FILENO, command.c_str(), command.length());
             continue;
           } else {
-            auto displayCommand = commandHistory[historyIndex];
-
+            std:: string displayCommand = commandHistory[historyIndex];
             printPrompt();
             command = displayCommand;
-            write(STDOUT_FILENO, command.c_str(), command.length());
+            write(STDOUT_FILENO, displayCommand.c_str(), displayCommand.length());
           }
         } if (c == 0x42)// down arrow
         {
           clearField(128);
-          historyIndex++;
+          historyIndex+=1;
            if(historyIndex >= int(commandHistory.size()) || historyIndex >=10){
             historyIndex = int(commandHistory.size());
-             clearField(128);
+            clearField(128);
+            command = "";
             write(STDOUT_FILENO, "\a", 1);
             printPrompt();
             continue;
           } else
             {
-            auto displayCommand = std::next(commandHistory.begin(),historyIndex);
-            command = *displayCommand;
+            std:: string displayCommand = commandHistory[historyIndex];
             printPrompt();
-            write(STDOUT_FILENO, command.c_str(), command.length());
+            command = displayCommand;
+            write(STDOUT_FILENO, displayCommand.c_str(), displayCommand.length());
           }
         }
       }
@@ -165,48 +213,78 @@ std::string readCommand() {
   return command;
 }
 void addTohistory(std::string command) {
-  commandHistory.push_back(command);
-  historyIndex++;
-  if (commandHistory.size() > 10) {
-    commandHistory.erase(commandHistory.begin());
+  if (command !="")
+  {
+    command.pop_back();
+    historyIndex = commandHistory.size()+1;
+    commandHistory.push_back(command);
+    if (commandHistory.size() > 10) {
+      commandHistory.erase(commandHistory.begin());
+    }
   }
-}
-std::list<std::string> processCommand(std::string command) {
-  command.pop_back();
-  addTohistory(command);
-  std::list<std::string> CommandandArgs;
-  tokenize(command, " ", CommandandArgs);
-  return CommandandArgs;
-}
 
-void executeCommand(std::list<std::string> processedCommand) {
-  if (processedCommand.front() == "exit") {
-    isExit = true;
+}
+std::vector<std::vector<std::string>> processCommand(std::string command) {
+  addTohistory(command);
+  command = tokenize(command);
+  std::vector<std::string> CommandandArgs;
+  char temp[command.length()];
+  strcpy(temp, command.c_str());
+  char *token;
+  token = strtok(temp, "|");
+  while ( token != NULL){
+    CommandandArgs.push_back(token);
+    token = strtok(NULL, "|");
+  }
+  char* minitoken;
+  std::vector<std::vector<std::string>> AllCommands(CommandandArgs.size());
+  for(int i =0; i < CommandandArgs.size();i++){
+    char temp[CommandandArgs[i].length()];
+    strcpy(temp, CommandandArgs[i].c_str());
+    minitoken = strtok(temp, " ");
+    while ( minitoken != NULL){
+      AllCommands[i].push_back(minitoken);
+      minitoken = strtok(NULL, " ");
+    }
+  }
+  return AllCommands;
+}
+void runCommand(std::string command, std::vector<std::string> args){
+  if (args.size() == 0) args.push_back("noargs");
+  if(command == "cd")
+    cd(args[0]);
+  else if (command == "ls")
+    ls(args[0]);
+  else if (command == "ff")
+    ff(args[0], args[1]);
+  else if (command == "pwd")
+    pwd();
+  else if (command == "exit")
+    exit(0);
+  else{
+
+  }
+
+}
+void executeCommand(std::vector<std::vector<std::string>> processedCommands) {
+  if(processedCommands.size() == 0)
+  {
+    return;
+  } else if (processedCommands.size() == 1){
+    auto command = processedCommands[0][0];
+    processedCommands[0].erase(processedCommands[0].begin());
+    runCommand(command,processedCommands[0]);
+  } else {
+    
     return;
   }
-  if (processedCommand.front() == "cd") {
-    cd(*std::next(processedCommand.begin(), 1));
-  } else {
-    write(STDOUT_FILENO, "Command: ", 9);
-    for (auto &s: processedCommand) {
-      if (s == "noargs") {
-        break;
-      }
-      write(STDOUT_FILENO, s.c_str(), s.length());
-      write(STDOUT_FILENO, " ", 1);
-    }
-    write(STDOUT_FILENO, "\n", 1);
-  }
-//  if (processedCommand.front() == "ls") ls(*std::next(processedCommand.begin(),1));
-//  if (processedCommand.front() == "pwd") pwd();
-//  if (processedCommand.front() == "ff") ff(*std::next(processedCommand.begin(),1), *std::next(processedCommand.begin(),2));
 }
 
 int main(int argc, char *argv[]) {
   struct termios SavedTermAttributes;
   std::string command;
   SetNonCanonicalMode(STDIN_FILENO, &SavedTermAttributes);
-  std::list<std::string> processedCommand;
+  std::vector<std::vector<std::string>> processedCommand;
   while (isExit == false) {
     printPrompt();
     command = readCommand();
