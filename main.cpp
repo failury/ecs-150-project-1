@@ -4,6 +4,8 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <stdlib.h>
 #include <termios.h>
 #include <ctype.h>
@@ -11,9 +13,11 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <dirent.h>
 bool isExit = false;
 std::vector<std::string> commandHistory;
 int historyIndex = 0;
+std::string parentDirecoty;
 void clearField(int size){
   for (unsigned int i = 0; i < size; i++) {// clear the field
     write(STDOUT_FILENO, "\b \b", 3);
@@ -39,13 +43,6 @@ std::string tokenize(std::string string) {
     // if current characters is non-space
     if (str[j] != ' ')
     {
-      // remove preceding spaces before dot,
-      // comma & question mark
-      if ((str[j] == '.' || str[j] == ',' ||
-          str[j] == '?') && i - 1 >= 0 &&
-          str[i - 1] == ' ')
-        str[i - 1] = str[j++];
-      else
         // copy current character at index i
         // and increment both i and j
         str[i++] = str[j++];
@@ -94,7 +91,38 @@ void cd(std::string directory) {
   }
 }
 void ls(std::string directory) {
-
+  //https://stackoverflow.com/a/612176
+  //https://stackoverflow.com/a/10323131
+  std::string currentDirecoty= getcwd(NULL, 0);
+  if(directory == "noargs")
+  {
+    directory = currentDirecoty;
+  }
+  DIR *dir;
+  struct dirent *ent;
+  struct stat filestatus;
+  if ((dir = opendir (directory.c_str())) != NULL) {
+    while((ent = readdir (dir)) != NULL){
+      stat(directory.c_str(), &filestatus);
+      if(S_ISDIR(filestatus.st_mode)){write(STDOUT_FILENO, "d", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IRUSR){write(STDOUT_FILENO, "r", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IWUSR){write(STDOUT_FILENO, "w", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IXUSR){write(STDOUT_FILENO, "x", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IRGRP){write(STDOUT_FILENO, "r", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IWGRP){write(STDOUT_FILENO, "w", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IXGRP){write(STDOUT_FILENO, "x", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IROTH){write(STDOUT_FILENO, "r", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IWOTH){write(STDOUT_FILENO, "w", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if(filestatus.st_mode & S_IXOTH){write(STDOUT_FILENO, "x", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      write(STDOUT_FILENO, " ", 1);
+      write(STDOUT_FILENO,ent->d_name,strlen(ent->d_name));
+      write(STDOUT_FILENO, "\n", 1);
+    }
+    closedir (dir);
+    } else {
+    write(STDOUT_FILENO, ("Failed to open directory \"" + directory + "\"").c_str(), directory.length()+ 27);
+    write(STDOUT_FILENO, "\n", 1);
+  }
 }
 void pwd() {
   std::string currentDirecoty= getcwd(NULL, 0);
@@ -102,7 +130,39 @@ void pwd() {
   write(STDOUT_FILENO, "\n", 1);
 }
 void ff(std::string filename, std::string directory) {
-
+  DIR *dir;
+  struct dirent *ent;
+  struct stat filestatus;
+  std::string currentDirecoty= getcwd(NULL, 0);
+  int firsTime = 0;
+  if(directory == "noargs")
+  {
+    directory = currentDirecoty;
+  }
+  if(firsTime == 0) {
+    parentDirecoty = currentDirecoty;
+    auto index = parentDirecoty.find_last_of("/");
+    parentDirecoty = parentDirecoty.substr(index+1);
+  }
+  if ((dir = opendir (directory.c_str())) != NULL) {
+    while((ent = readdir (dir)) != NULL){
+      if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0)
+      {
+        std::string file = std::string(ent->d_name);
+        if (file == filename){
+          auto index = directory.find(parentDirecoty);
+          auto display = directory.substr(index);
+          write(STDOUT_FILENO,display.c_str(),display.length());
+          write(STDOUT_FILENO, "/", 1);
+          write(STDOUT_FILENO,ent->d_name,strlen(ent->d_name));
+          write(STDOUT_FILENO, "\n", 1);
+        }
+        std:: string subpath = directory + "/" + ent->d_name;
+        firsTime++;
+        ff(filename,subpath);
+      }
+    }
+  }
 }
 void ResetCanonicalMode(int fd, struct termios *savedattributes){
   tcsetattr(fd, TCSANOW, savedattributes);
@@ -250,7 +310,7 @@ std::vector<std::vector<std::string>> processCommand(std::string command) {
   return AllCommands;
 }
 void runCommand(std::string command, std::vector<std::string> args){
-  if (args.size() == 0) args.push_back("noargs");
+  args.push_back("noargs");
   if(command == "cd")
     cd(args[0]);
   else if (command == "ls")
@@ -275,7 +335,7 @@ void executeCommand(std::vector<std::vector<std::string>> processedCommands) {
     processedCommands[0].erase(processedCommands[0].begin());
     runCommand(command,processedCommands[0]);
   } else {
-    
+
     return;
   }
 }

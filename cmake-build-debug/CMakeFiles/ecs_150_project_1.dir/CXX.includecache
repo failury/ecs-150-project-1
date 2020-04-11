@@ -11,6 +11,10 @@ unistd.h
 -
 stdio.h
 -
+sys/stat.h
+-
+sys/types.h
+-
 stdlib.h
 -
 termios.h
@@ -24,5 +28,7 @@ iostream
 vector
 -
 list
+-
+dirent.h
 -
 
