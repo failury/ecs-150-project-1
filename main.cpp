@@ -14,11 +14,13 @@
 #include <vector>
 #include <list>
 #include <dirent.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 bool isExit = false;
 std::vector<std::string> commandHistory;
 int historyIndex = 0;
 std::string parentDirecoty;
-void clearField(int size){
+void clearField(int size) {
   for (unsigned int i = 0; i < size; i++) {// clear the field
     write(STDOUT_FILENO, "\b \b", 3);
   }
@@ -38,54 +40,48 @@ std::string tokenize(std::string string) {
   // Handles leading spaces
   while (++j < n && str[j] == ' ');
   // read all characters of original string
-  while (j < n)
-  {
+  while (j < n) {
     // if current characters is non-space
-    if (str[j] != ' ')
-    {
-        // copy current character at index i
-        // and increment both i and j
-        str[i++] = str[j++];
+    if (str[j] != ' ') {
+      // copy current character at index i
+      // and increment both i and j
+      str[i++] = str[j++];
       // set space flag to false when any
       // non-space character is found
       spaceFound = false;
     }
       // if current character is a space
-    else if (str[j++] == ' ')
-    {
+    else if (str[j++] == ' ') {
       // If space is encountered for the first
       // time after a word, put one space in the
       // output and set space flag to true
-      if (!spaceFound)
-      {
+      if (!spaceFound) {
         str[i++] = ' ';
         spaceFound = true;
       }
     }
   }
-
   // Remove trailing spaces
   if (i <= 1)
     str.erase(str.begin() + i, str.end());
   else
     str.erase(str.begin() + i - 1, str.end());
   return str;
-  }
+}
 void cd(std::string directory) {
   std::string destination;
-  std::string currentDirecoty= getcwd(NULL, 0);
-  if(directory == "noargs")
-  {
-  chdir(getenv("HOME"));
-  }else if(directory == "..") {
-  auto index = currentDirecoty.find_last_of("/");
-    destination = currentDirecoty.substr(0,index);
-    if (chdir(destination.c_str()) == -1){
+  std::string currentDirecoty = getcwd(NULL, 0);
+  if (directory == "noargs") {
+    chdir(getenv("HOME"));
+  } else if (directory == "..") {
+    auto index = currentDirecoty.find_last_of("/");
+    destination = currentDirecoty.substr(0, index);
+    if (chdir(destination.c_str()) == -1) {
       write(STDOUT_FILENO, "Error Changing Directory\n", 25);
     }
   } else {
     destination = currentDirecoty + "/" + directory;
-    if(chdir(destination.c_str()) == -1){
+    if (chdir(destination.c_str()) == -1) {
       write(STDOUT_FILENO, "Error Changing Directory\n", 25);
     }
   }
@@ -93,87 +89,83 @@ void cd(std::string directory) {
 void ls(std::string directory) {
   //https://stackoverflow.com/a/612176
   //https://stackoverflow.com/a/10323131
-  std::string currentDirecoty= getcwd(NULL, 0);
-  if(directory == "noargs")
-  {
+  std::string currentDirecoty = getcwd(NULL, 0);
+  if (directory == "noargs") {
     directory = currentDirecoty;
   }
   DIR *dir;
   struct dirent *ent;
   struct stat filestatus;
-  if ((dir = opendir (directory.c_str())) != NULL) {
-    while((ent = readdir (dir)) != NULL){
+  if ((dir = opendir(directory.c_str())) != NULL) {
+    while ((ent = readdir(dir)) != NULL) {
       stat(directory.c_str(), &filestatus);
-      if(S_ISDIR(filestatus.st_mode)){write(STDOUT_FILENO, "d", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IRUSR){write(STDOUT_FILENO, "r", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IWUSR){write(STDOUT_FILENO, "w", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IXUSR){write(STDOUT_FILENO, "x", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IRGRP){write(STDOUT_FILENO, "r", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IWGRP){write(STDOUT_FILENO, "w", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IXGRP){write(STDOUT_FILENO, "x", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IROTH){write(STDOUT_FILENO, "r", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IWOTH){write(STDOUT_FILENO, "w", 1);} else{write(STDOUT_FILENO, "-", 1);	}
-      if(filestatus.st_mode & S_IXOTH){write(STDOUT_FILENO, "x", 1);} else{write(STDOUT_FILENO, "-", 1);	}
+      if (S_ISDIR(filestatus.st_mode)) { write(STDOUT_FILENO, "d", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IRUSR) { write(STDOUT_FILENO, "r", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IWUSR) { write(STDOUT_FILENO, "w", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IXUSR) { write(STDOUT_FILENO, "x", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IRGRP) { write(STDOUT_FILENO, "r", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IWGRP) { write(STDOUT_FILENO, "w", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IXGRP) { write(STDOUT_FILENO, "x", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IROTH) { write(STDOUT_FILENO, "r", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IWOTH) { write(STDOUT_FILENO, "w", 1); } else { write(STDOUT_FILENO, "-", 1); }
+      if (filestatus.st_mode & S_IXOTH) { write(STDOUT_FILENO, "x", 1); } else { write(STDOUT_FILENO, "-", 1); }
       write(STDOUT_FILENO, " ", 1);
-      write(STDOUT_FILENO,ent->d_name,strlen(ent->d_name));
+      write(STDOUT_FILENO, ent->d_name, strlen(ent->d_name));
       write(STDOUT_FILENO, "\n", 1);
     }
-    closedir (dir);
-    } else {
-    write(STDOUT_FILENO, ("Failed to open directory \"" + directory + "\"").c_str(), directory.length()+ 27);
+    closedir(dir);
+  } else {
+    write(STDOUT_FILENO, ("Failed to open directory \"" + directory + "\"").c_str(), directory.length() + 27);
     write(STDOUT_FILENO, "\n", 1);
   }
 }
 void pwd() {
-  std::string currentDirecoty= getcwd(NULL, 0);
-  write(STDOUT_FILENO,currentDirecoty.c_str(),currentDirecoty.length());
+  std::string currentDirecoty = getcwd(NULL, 0);
+  write(STDOUT_FILENO, currentDirecoty.c_str(), currentDirecoty.length());
   write(STDOUT_FILENO, "\n", 1);
 }
 void ff(std::string filename, std::string directory) {
   DIR *dir;
   struct dirent *ent;
   struct stat filestatus;
-  std::string currentDirecoty= getcwd(NULL, 0);
+  std::string currentDirecoty = getcwd(NULL, 0);
   int firsTime = 0;
-  if(directory == "noargs")
-  {
+  if (directory == "noargs") {
     directory = currentDirecoty;
   }
-  if(firsTime == 0) {
+  if (firsTime == 0) {
     parentDirecoty = currentDirecoty;
     auto index = parentDirecoty.find_last_of("/");
-    parentDirecoty = parentDirecoty.substr(index+1);
+    parentDirecoty = parentDirecoty.substr(index + 1);
   }
-  if ((dir = opendir (directory.c_str())) != NULL) {
-    while((ent = readdir (dir)) != NULL){
-      if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0)
-      {
+  if ((dir = opendir(directory.c_str())) != NULL) {
+    while ((ent = readdir(dir)) != NULL) {
+      if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0) {
         std::string file = std::string(ent->d_name);
-        if (file == filename){
+        if (file == filename) {
           auto index = directory.find(parentDirecoty);
           auto display = directory.substr(index);
-          write(STDOUT_FILENO,display.c_str(),display.length());
+          write(STDOUT_FILENO, display.c_str(), display.length());
           write(STDOUT_FILENO, "/", 1);
-          write(STDOUT_FILENO,ent->d_name,strlen(ent->d_name));
+          write(STDOUT_FILENO, ent->d_name, strlen(ent->d_name));
           write(STDOUT_FILENO, "\n", 1);
         }
-        std:: string subpath = directory + "/" + ent->d_name;
+        std::string subpath = directory + "/" + ent->d_name;
         firsTime++;
-        ff(filename,subpath);
+        ff(filename, subpath);
       }
     }
   }
 }
-void ResetCanonicalMode(int fd, struct termios *savedattributes){
+void ResetCanonicalMode(int fd, struct termios *savedattributes) {
   tcsetattr(fd, TCSANOW, savedattributes);
 }
-
-void SetNonCanonicalMode(int fd, struct termios *savedattributes){
+void SetNonCanonicalMode(int fd, struct termios *savedattributes) {
   struct termios TermAttributes;
 
   // Make sure stdin is a terminal.
-  if(!isatty(fd)){
-    fprintf (stderr, "Not a terminal.\n");
+  if (!isatty(fd)) {
+    fprintf(stderr, "Not a terminal.\n");
     exit(0);
   }
 
@@ -181,7 +173,7 @@ void SetNonCanonicalMode(int fd, struct termios *savedattributes){
   tcgetattr(fd, savedattributes);
 
   // Set the funny terminal modes.
-  tcgetattr (fd, &TermAttributes);
+  tcgetattr(fd, &TermAttributes);
   TermAttributes.c_lflag &= ~(ICANON | ECHO); // Clear ICANON and ECHO. 
   TermAttributes.c_cc[VMIN] = 1;
   TermAttributes.c_cc[VTIME] = 0;
@@ -193,16 +185,16 @@ void printPrompt() {
   WorkingDirectory = getcwd(NULL, 0);
   std::string output = "/.../";
   int index;
-    if (WorkingDirectory.length() >= 16) {
-      index = WorkingDirectory.find_last_of("/");
-      WorkingDirectory = WorkingDirectory.substr(index+1);
-      WorkingDirectory +="% ";
-      output+= WorkingDirectory;
-      write(STDOUT_FILENO, output.c_str(), output.length());
-    } else {
-      WorkingDirectory +="% ";
-      write(STDOUT_FILENO, WorkingDirectory.c_str(), WorkingDirectory.length());
-    }
+  if (WorkingDirectory.length() >= 16) {
+    index = WorkingDirectory.find_last_of("/");
+    WorkingDirectory = WorkingDirectory.substr(index + 1);
+    WorkingDirectory += "% ";
+    output += WorkingDirectory;
+    write(STDOUT_FILENO, output.c_str(), output.length());
+  } else {
+    WorkingDirectory += "% ";
+    write(STDOUT_FILENO, WorkingDirectory.c_str(), WorkingDirectory.length());
+  }
 
 }
 std::string readCommand() {
@@ -222,13 +214,14 @@ std::string readCommand() {
         write(STDOUT_FILENO, "\b \b", 3);//**
         command.pop_back();
       }
-    } else if (c== 0x1B) { //the up arrow is represented as three ASCII character, 0x1B, 0x5B and 0x41, down arrow is x1B, 0x5B and 0x42.
+    } else if (c
+        == 0x1B) { //the up arrow is represented as three ASCII character, 0x1B, 0x5B and 0x41, down arrow is x1B, 0x5B and 0x42.
       read(STDIN_FILENO, &c, 1);
       if (c == 0x5B) {
         read(STDIN_FILENO, &c, 1);
         if (c == 0x41) {
           clearField(128);
-          historyIndex-=1;
+          historyIndex -= 1;
           if (historyIndex <= 0) {
             historyIndex = 0;
             write(STDOUT_FILENO, "\a", 1);
@@ -239,44 +232,43 @@ std::string readCommand() {
             write(STDOUT_FILENO, command.c_str(), command.length());
             continue;
           } else {
-            std:: string displayCommand = commandHistory[historyIndex];
+            std::string displayCommand = commandHistory[historyIndex];
             printPrompt();
             command = displayCommand;
             write(STDOUT_FILENO, displayCommand.c_str(), displayCommand.length());
           }
-        } if (c == 0x42)// down arrow
+        }
+        if (c == 0x42)// down arrow
         {
           clearField(128);
-          historyIndex+=1;
-           if(historyIndex >= int(commandHistory.size()) || historyIndex >=10){
+          historyIndex += 1;
+          if (historyIndex >= int(commandHistory.size()) || historyIndex >= 10) {
             historyIndex = int(commandHistory.size());
             clearField(128);
             command = "";
             write(STDOUT_FILENO, "\a", 1);
             printPrompt();
             continue;
-          } else
-            {
-            std:: string displayCommand = commandHistory[historyIndex];
+          } else {
+            std::string displayCommand = commandHistory[historyIndex];
             printPrompt();
             command = displayCommand;
             write(STDOUT_FILENO, displayCommand.c_str(), displayCommand.length());
           }
         }
       }
-    }
-    else {
-      command += c;
-      write(STDOUT_FILENO, &c, 1);
+    } else {
+        command += c;
+        write(STDOUT_FILENO, &c, 1);
+
     }
   } while (c != 0x0A);
   return command;
 }
 void addTohistory(std::string command) {
-  if (command !="")
-  {
+  if (command != "") {
     command.pop_back();
-    historyIndex = commandHistory.size()+1;
+    historyIndex = commandHistory.size() + 1;
     commandHistory.push_back(command);
     if (commandHistory.size() > 10) {
       commandHistory.erase(commandHistory.begin());
@@ -287,54 +279,88 @@ void addTohistory(std::string command) {
 std::vector<std::vector<std::string>> processCommand(std::string command) {
   addTohistory(command);
   command = tokenize(command);
+  int index;
+  if (command.find(">") != std::string::npos) {
+    index = command.find(">");
+    command = command.substr(0, index) + " " + ">" + " " + command.substr(index + 1);
+  }
+  if (command.find("<")!= std::string::npos) {
+    index = command.find("<");
+    command = command.substr(0, index) + " " + ">" + " " + command.substr(index + 1);
+  }
   std::vector<std::string> CommandandArgs;
   char temp[command.length()];
   strcpy(temp, command.c_str());
   char *token;
   token = strtok(temp, "|");
-  while ( token != NULL){
+  while (token != NULL) {
     CommandandArgs.push_back(token);
     token = strtok(NULL, "|");
   }
-  char* minitoken;
+
+  char *minitoken;
   std::vector<std::vector<std::string>> AllCommands(CommandandArgs.size());
-  for(int i =0; i < CommandandArgs.size();i++){
+  for (int i = 0; i < CommandandArgs.size(); i++) {
     char temp[CommandandArgs[i].length()];
     strcpy(temp, CommandandArgs[i].c_str());
     minitoken = strtok(temp, " ");
-    while ( minitoken != NULL){
+    while (minitoken != NULL) {
       AllCommands[i].push_back(minitoken);
       minitoken = strtok(NULL, " ");
     }
   }
   return AllCommands;
 }
-void runCommand(std::string command, std::vector<std::string> args){
-  args.push_back("noargs");
-  if(command == "cd")
-    cd(args[0]);
-  else if (command == "ls")
-    ls(args[0]);
-  else if (command == "ff")
-    ff(args[0], args[1]);
-  else if (command == "pwd")
-    pwd();
-  else if (command == "exit")
+void runCommand(std::vector<std::string> args) {
+  int status;
+  //handle command by parent
+  if (args[0] == "cd")
+  {
+    args.push_back("noargs");
+    cd(args[1]);
+  }else if (args[0] == "exit")
+  {
     exit(0);
-  else{
+  }
+  else {//handle command by child
 
+    std::vector<char *> temp;
+    for (int i = 0; i < args.size(); i++){
+      temp.push_back((char*)(args[i]).c_str());
+    }
+    char** cmd = &temp[0];
+  pid_t childPid = fork(); //starting to fork process
+      if (childPid == 0)
+      {//0 means child process
+        if (args[0] == "pwd") pwd();
+        else if (args[0] == "ff")  {
+          args.push_back("noargs");
+          ff(args[1], args[2]);
+        }
+        else if(args[0] == "ls"){
+          args.push_back("noargs");
+          ls(args[1]);
+        } else {
+          if(execvp(cmd[0], cmd) < 0){
+            write(STDOUT_FILENO,"\nFailed to execute ",19);
+            write(STDOUT_FILENO,args[0].c_str(),args[0].length());
+            write(STDOUT_FILENO,"\n",1);
+          }
+          exit(0);
+        }
+      } else {
+        //parent process wait for child complete the process
+        waitpid(-1,&status,0); //-1 meaning wait for any child process. status to store exitstatus for child. 0 means no options
+      }
   }
 
 }
 void executeCommand(std::vector<std::vector<std::string>> processedCommands) {
-  if(processedCommands.size() == 0)
-  {
+  if (processedCommands.size() == 0) {
     return;
-  } else if (processedCommands.size() == 1){
-    auto command = processedCommands[0][0];
-    processedCommands[0].erase(processedCommands[0].begin());
-    runCommand(command,processedCommands[0]);
-  } else {
+  } else if (processedCommands.size() == 1) {//no piping
+    runCommand(processedCommands[0]);
+  } else {//piping
 
     return;
   }

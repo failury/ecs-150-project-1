@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ab21af7-1ad0-43c9-b84e-adc2982f3267" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -34,51 +33,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="346" column="38" selection-start-line="346" selection-start-column="38" selection-end-line="346" selection-end-column="38" />
+              <folding>
+                <element signature="e#42#61#0" expanded="true" />
+                <element signature="e#392#524#0" />
+                <element signature="e#1849#2437#0" />
+                <element signature="e#2438#4258#0" />
+                <element signature="e#4259#4427#0" />
+                <element signature="e#4428#5566#0" />
+                <element signature="e#5678#6250#0" />
+                <element signature="e#8951#9225#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="62">
               <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="4" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/9.3.0/include/c++/bits/stl_vector.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="557" selection-start-line="557" selection-end-line="557" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="154" column="45" selection-start-line="154" selection-start-column="45" selection-end-line="154" selection-end-column="45" />
-              <folding>
-                <element signature="e#42#61#0" expanded="true" />
-                <element signature="e#299#431#0" />
-                <element signature="e#2411#4046#0" />
-                <element signature="e#2616#2784#0" />
-                <element signature="e#2843#2953#0" />
-                <element signature="e#2955#3527#0" />
-                <element signature="e#4094#6227#0" />
-                <element signature="e#6228#6502#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../reference/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4793">
-              <caret line="136" column="34" lean-forward="true" selection-start-line="136" selection-start-column="2" selection-end-line="136" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -106,9 +84,9 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="width" value="1298" />
-    <option name="height" value="1399" />
+    <option name="x" value="-10" />
+    <option name="width" value="1300" />
+    <option name="height" value="1400" />
   </component>
   <component name="ProjectId" id="1a6j19Uzb77xxadjQi5qdQxHiig" />
   <component name="ProjectLevelVcsManager">
@@ -200,12 +178,12 @@
       <workItem from="1586233052481" duration="10625000" />
       <workItem from="1586259978883" duration="3975000" />
       <workItem from="1586264287545" duration="21711000" />
-      <workItem from="1586621117592" duration="8653000" />
+      <workItem from="1586621117592" duration="23488000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34339000" />
+    <option name="totallyTimeSpent" value="49174000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
@@ -307,14 +285,14 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>355</line>
+          <line>381</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
-        <watch expression="ent-&gt;d_name" />
+        <watch expression="commandHistory" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
@@ -375,6 +353,11 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>command.find(&quot;&gt;&quot;)</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>filename.c_str()</expression-string>
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -421,6 +404,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../reference/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7589">
+          <caret line="444" column="11" lean-forward="true" selection-start-line="444" selection-start-column="11" selection-end-line="444" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="62">
@@ -428,36 +421,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../reference/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4793">
-          <caret line="136" column="34" lean-forward="true" selection-start-line="136" selection-start-column="2" selection-end-line="136" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/9.3.0/include/c++/bits/stl_vector.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="557" selection-start-line="557" selection-end-line="557" />
+        <state relative-caret-position="31">
+          <caret line="551" selection-start-line="551" selection-end-line="551" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="154" column="45" selection-start-line="154" selection-start-column="45" selection-end-line="154" selection-end-column="45" />
+        <state relative-caret-position="159">
+          <caret line="346" column="38" selection-start-line="346" selection-start-column="38" selection-end-line="346" selection-end-column="38" />
           <folding>
             <element signature="e#42#61#0" expanded="true" />
-            <element signature="e#299#431#0" />
-            <element signature="e#2411#4046#0" />
-            <element signature="e#2616#2784#0" />
-            <element signature="e#2843#2953#0" />
-            <element signature="e#2955#3527#0" />
-            <element signature="e#4094#6227#0" />
-            <element signature="e#6228#6502#0" />
+            <element signature="e#392#524#0" />
+            <element signature="e#1849#2437#0" />
+            <element signature="e#2438#4258#0" />
+            <element signature="e#4259#4427#0" />
+            <element signature="e#4428#5566#0" />
+            <element signature="e#5678#6250#0" />
+            <element signature="e#8951#9225#0" />
           </folding>
         </state>
       </provider>
