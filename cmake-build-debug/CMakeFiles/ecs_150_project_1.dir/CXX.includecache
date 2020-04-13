@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/failury/Desktop/ecs-150-project-1/main.cpp
+/home/failury/Desktop/ecs-150-project-1/main.cpp
 unistd.h
 -
 stdio.h
@@ -34,5 +34,9 @@ dirent.h
 sys/types.h
 -
 sys/wait.h
+-
+fcntl.h
+-
+fcntl.h
 -
 
