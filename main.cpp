@@ -209,8 +209,9 @@ void printPrompt() {
 }
 
 std::string readCommand() {
-    std::string command;
-    char c;
+    std::string command = "";
+    command.clear();
+    char c = NULL;
     do {
         read(STDIN_FILENO, &c, 1);
         if (c == '\004') // control D detect
@@ -393,7 +394,6 @@ void singleCommand(std::vector<std::string> command){
             ls(command[1]);
         }else {
             execvp(cmd[0], cmd);
-
         }
         exit(0);
     } else {
@@ -404,20 +404,23 @@ void singleCommand(std::vector<std::string> command){
 }
 void pipeCommand(std::vector<std::string> command1, std::vector<std::string> command2){
     int filedescriptor[2];
+    int status;
     pipe(filedescriptor);
     pid_t childPid = fork();
-    if (childPid == 0) {
-        //child
-        close(filedescriptor[1]);
-        close(STDIN_FILENO);
-        dup(filedescriptor[0]);
-        close(filedescriptor[0]);
-        singleCommand(command2);
-    } else {
+    if (childPid != 0) {
+        //parent
+        waitpid(-1, &status,
+                0);
         close(filedescriptor[0]);
         dup2(filedescriptor[1],STDOUT_FILENO);
         close(filedescriptor[1]);
         singleCommand(command1);
+    } else {
+        //child
+        close(filedescriptor[1]);
+        dup2(filedescriptor[0],STDIN_FILENO);
+        close(filedescriptor[0]);
+        singleCommand(command2);
     }
 }
 void runCommand(std::vector<std::vector<std::string>> processedCommands) {
@@ -428,7 +431,7 @@ void runCommand(std::vector<std::vector<std::string>> processedCommands) {
         cd(processedCommands[0][1]);
     }
     if (processedCommands[0][0] == "exit") {
-        exit(0);
+        isExit = true;
     }
     if (processedCommands.size() == 1){
         singleCommand(processedCommands[0]);
@@ -446,8 +449,9 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<std::string>> processedCommand;
     while (isExit == false) {
         printPrompt();
+        command = "";
         command = readCommand();
-
+            processedCommand.clear();
             processedCommand = processCommand(command);
             runCommand(processedCommand);
 
