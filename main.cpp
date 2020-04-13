@@ -300,7 +300,7 @@ std::vector<std::vector<std::string>> processCommand(std::string command) {
     }
     if (command.find("<") != std::string::npos) {
         index = command.find("<");
-        command = command.substr(0, index) + " " + ">" + " " + command.substr(index + 1);
+        command = command.substr(0, index) + " " + "<" + " " + command.substr(index + 1);
     }
     char temp[command.length()];
     strcpy(temp, command.c_str());
@@ -362,12 +362,7 @@ void singleCommand(std::vector<std::string> command){
         if (command[i] == "<") redirectin = true;
         if (command[i] == ">") redirectout = true;
     }
-    char *cmd[command.size()+1];
-    for (int i = 0; i < command.size(); i++) {
-        cmd[i] =(char *) malloc(command[i].length());
-        strcpy(cmd[i],command[i].c_str());
-    }
-    cmd[command.size()] = NULL;
+
     pid_t childPid = fork(); //starting to fork process
     if (childPid == 0) {//0 means child process
         if (redirectin){
@@ -380,18 +375,27 @@ void singleCommand(std::vector<std::string> command){
             command.erase(command.begin()+index);
             command.erase(command.begin()+index);
         }
-        if (command[0] == "pwd") pwd();
-        if (command[0] == "ff") {
+        char *cmd[command.size()+1];
+        for (int i = 0; i < command.size(); i++) {
+            cmd[i] =(char *) malloc(command[i].length());
+            strcpy(cmd[i],command[i].c_str());
+        }
+        cmd[command.size()] = NULL;
+        if (command[0] == "pwd") {
+            pwd();
+        }
+        else if (command[0] == "ff") {
             command.push_back("noargs");
             ff(command[1], command[2]);
         }
-        if (command[0] == "ls") {
+        else if (command[0] == "ls") {
             command.push_back("noargs");
             ls(command[1]);
-        } else {
+        }else {
             execvp(cmd[0], cmd);
-            exit(0);
+
         }
+        exit(0);
     } else {
         //parent process wait for child complete the process
         waitpid(-1, &status,
